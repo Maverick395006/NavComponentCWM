@@ -5,13 +5,13 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context=".fragments.ViewBalanceFragment">
+    tools:context=".fragments.ConfirmationFragment">
 
     <TextView
-        android:id="@+id/balance_value"
+        android:id="@+id/confirmation_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="$1"
-        android:textSize="30sp" />
+        android:text="$1 was sent to Mitch"
+        android:textSize="25sp" />
 
 </LinearLayout>
