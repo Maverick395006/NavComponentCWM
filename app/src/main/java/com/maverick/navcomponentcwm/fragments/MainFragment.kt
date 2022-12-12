@@ -43,15 +43,18 @@ class MainFragment : Fragment(), View.OnClickListener {
     }
 
     override fun onClick(v: View?) {
-        when (v!!.id) {
-            binding.viewTransactionsBtn.id -> navController!!.navigate(R.id.action_mainFragment_to_viewTransactionFragment)
-            binding.sendMoneyBtn.id -> navController!!.navigate(R.id.action_mainFragment_to_chooseRecipientFragment)
-            binding.viewBalanceBtn.id -> navController!!.navigate(R.id.action_mainFragment_to_viewBalanceFragment)
+        binding.apply {
+            when (v!!.id) {
+                viewTransactionsBtn.id -> navController!!.navigate(R.id.action_mainFragment_to_viewTransactionFragment)
+                sendMoneyBtn.id -> navController!!.navigate(R.id.action_mainFragment_to_chooseRecipientFragment)
+                viewBalanceBtn.id -> navController!!.navigate(R.id.action_mainFragment_to_viewBalanceFragment)
+            }
         }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+        navController = null
     }
 }
