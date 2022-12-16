@@ -16,7 +16,9 @@
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@+id/mainFragment"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_mainFragment_to_viewTransactionFragment"
             app:destination="@id/viewTransactionFragment"
@@ -51,13 +53,23 @@
         android:id="@+id/confirmationFragment"
         android:name="com.maverick.navcomponentcwm.fragments.ConfirmationFragment"
         android:label="fragment_confirmation"
-        tools:layout="@layout/fragment_confirmation" />
+        tools:layout="@layout/fragment_confirmation">
+        <argument
+            android:name="recipient"
+            android:defaultValue="none" />
+        <argument
+            android:name="amount"
+            app:argType="com.maverick.navcomponentcwm.model.Money" />
+    </fragment>
 
     <fragment
         android:id="@+id/specifyAmountFragment"
         android:name="com.maverick.navcomponentcwm.fragments.SpecifyAmountFragment"
         android:label="fragment_specify_amount"
         tools:layout="@layout/fragment_specify_amount">
+        <argument
+            android:name="recipient"
+            android:defaultValue="none" />
         <action
             android:id="@+id/action_specifyAmountFragment_to_confirmationFragment"
             app:destination="@id/confirmationFragment"

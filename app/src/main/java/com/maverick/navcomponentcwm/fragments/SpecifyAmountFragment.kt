@@ -15,7 +15,13 @@ class SpecifyAmountFragment : Fragment(), View.OnClickListener {
     private var _binding: FragmentSpecifyAmountBinding? = null
     private val binding get() = _binding!!
 
-    var navController: NavController? = null
+    lateinit var navController: NavController
+    lateinit var recipient: String
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        recipient = requireArguments().getString("recipient").toString()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,6 +37,8 @@ class SpecifyAmountFragment : Fragment(), View.OnClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.recipient.text = "Sending money to $recipient"
 
         navController = Navigation.findNavController(view)
 
@@ -53,6 +61,5 @@ class SpecifyAmountFragment : Fragment(), View.OnClickListener {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-        navController = null
     }
 }

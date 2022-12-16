@@ -1,10 +1,12 @@
 package com.maverick.navcomponentcwm.fragments
 
 import android.os.Bundle
+import android.text.TextUtils
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.maverick.navcomponentcwm.R
@@ -44,7 +46,15 @@ class ChooseRecipientFragment : Fragment(), View.OnClickListener {
     override fun onClick(v: View?) {
         binding.apply {
             when (v!!.id) {
-                nextBtn.id -> navController!!.navigate(R.id.action_chooseRecipientFragment_to_specifyAmountFragment)
+                nextBtn.id -> {
+                    if (!TextUtils.isEmpty(binding.inputRecipient.text.toString())) {
+                        val bundle = bundleOf("recipient" to binding.inputRecipient.text.toString())
+                        navController!!.navigate(
+                            R.id.action_chooseRecipientFragment_to_specifyAmountFragment,
+                            bundle
+                        )
+                    }
+                }
                 cancelBtn.id -> activity?.onBackPressed()
             }
         }
