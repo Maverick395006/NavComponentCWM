@@ -38,7 +38,10 @@ class SpecifyAmountFragment : Fragment(), View.OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.recipient.text = "Sending money to $recipient"
+        binding.recipient.text = buildString {
+            append("Sending money to ")
+            append(recipient)
+        }
 
         navController = Navigation.findNavController(view)
 
@@ -52,7 +55,7 @@ class SpecifyAmountFragment : Fragment(), View.OnClickListener {
     override fun onClick(v: View?) {
         binding.apply {
             when (v!!.id) {
-                sendBtn.id -> navController!!.navigate(R.id.action_specifyAmountFragment_to_confirmationFragment)
+                sendBtn.id -> navController.navigate(R.id.action_specifyAmountFragment_to_confirmationFragment)
                 cancelBtn.id -> activity?.onBackPressed()
             }
         }
