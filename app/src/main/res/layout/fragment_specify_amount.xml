@@ -9,7 +9,7 @@
     tools:context=".fragments.SpecifyAmountFragment">
 
     <TextView
-        android:id="@+id/recipient"
+        android:id="@+id/tvRecipient"
         android:textSize="32sp"
         android:textColor="@color/purple_700"
         android:layout_width="wrap_content"

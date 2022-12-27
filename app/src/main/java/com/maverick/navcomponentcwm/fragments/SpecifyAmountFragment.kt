@@ -1,14 +1,17 @@
 package com.maverick.navcomponentcwm.fragments
 
 import android.os.Bundle
+import android.text.TextUtils
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import com.maverick.navcomponentcwm.R
 import com.maverick.navcomponentcwm.databinding.FragmentSpecifyAmountBinding
+import com.maverick.navcomponentcwm.model.Money
+import java.math.BigDecimal
 
 class SpecifyAmountFragment : Fragment(), View.OnClickListener {
 
@@ -20,7 +23,7 @@ class SpecifyAmountFragment : Fragment(), View.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        recipient = requireArguments().getString("recipient").toString()
+        recipient = arguments?.getString("recipient").toString()
     }
 
     override fun onCreateView(
@@ -38,7 +41,7 @@ class SpecifyAmountFragment : Fragment(), View.OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.recipient.text = buildString {
+        binding.tvRecipient.text = buildString {
             append("Sending money to ")
             append(recipient)
         }
@@ -55,7 +58,15 @@ class SpecifyAmountFragment : Fragment(), View.OnClickListener {
     override fun onClick(v: View?) {
         binding.apply {
             when (v!!.id) {
-                sendBtn.id -> navController.navigate(R.id.action_specifyAmountFragment_to_confirmationFragment)
+                sendBtn.id -> {
+                    if (!TextUtils.isEmpty(binding.inputAmount.text.toString())) {
+                        val amount = Money(BigDecimal(binding.inputAmount.text.toString()))
+                        val action = SpecifyAmountFragmentDirections.actionSpecifyAmountFragmentToConfirmationFragment(recipient,amount)
+                        navController.navigate(action)
+                    } else {
+                        Toast.makeText(activity, "Fill amount", Toast.LENGTH_SHORT).show()
+                    }
+                }
                 cancelBtn.id -> activity?.onBackPressed()
             }
         }

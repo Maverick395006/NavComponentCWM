@@ -56,10 +56,11 @@
         tools:layout="@layout/fragment_confirmation">
         <argument
             android:name="recipient"
-            android:defaultValue="none" />
+            app:argType="string" />
         <argument
             android:name="amount"
-            app:argType="com.maverick.navcomponentcwm.model.Money" />
+            app:argType="com.maverick.navcomponentcwm.model.Money"
+            app:nullable="true" />
     </fragment>
 
     <fragment
